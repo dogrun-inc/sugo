@@ -40,17 +40,25 @@ def extract_unique_ids() -> list:
 
 
 def cut_tsv(go: list, l:list)-> list:
+    i=0
+
     for tsv_filename in l:
+        i = i+1
+        list_name = "tsv_output_{}".format(i)
+        list_name = []
         with open('./{}'.format(tsv_filename), encoding='utf-8', newline='') as f:
             for cols in csv.reader(f):
                 # print(cols)
-        
-                for go_term in go:
-                    if go_term == 
+                for x in cols:
+                    go_sample = x[0]
+                    tpm = x[1]
+                    for go_term in go:
+                        if go_term == go_sample:
+                            list_name.append({go_term:tpm})
+                        else:
+                            list_name.append({go_term:0})
 
-     
-
-
+        print(list_name)
 
 
 if __name__ == "__main__":
