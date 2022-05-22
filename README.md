@@ -2,11 +2,18 @@
 
 ## sugoの機能について
 
-- sample x go ファイルをsqliteにストアしgrepするような機能をコマンドラインでツールとして提供します
+- sample x go ファイルをgrepし、tsvに書き出す機能etcをコマンドラインでツールとして提供します
 
-## PlantUMLで設計書を置いておきます
 
-- Pycharm(IntelliJ)やStudio CodeのPlantUMLプラグインでファイルを読み書きすることを想定しています
-- PlantUMLは[シーケンス図以外を書く場合Graphvizが必要](https://qiita.com/ot-aoyagi/items/d2bfbff219c592822d53)
-- graphvizのインストールが必要でインストール方法は[plantumlの日本語ページに](https://plantuml.com/ja/graphviz-dot)紹介されている
-- graphvizがbrew installできない際は[brew updateし対応](https://laox.com/ja/3sq7)　
+##　オプション
+
+- i :入力サンプルのディレクトリを指定。必須
+- c :フィルターする単語を指定。必須
+
+## 実行例
+
+```
+python sugo.py -g phosphorylation -i test_samples
+
+```
+
