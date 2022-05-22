@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da619223-5d13-43c2-9b0b-0c58c95d6ac2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/data/SRR5002413_2.tsv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/SRR524815.tsv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/SRR524823.tsv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/go-basic.obo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/sugo_process_diagram.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/sugo_process_diagram.pdf" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/sugo.py" beforeDir="false" afterPath="$PROJECT_DIR$/sugo.py" afterDir="false" />
+>>>>>>> 2022-oec-dev
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,22 +34,49 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+        <entry file="file://$PROJECT_DIR$/sugo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="653">
-              <caret line="147" column="9" selection-start-line="147" selection-start-column="9" selection-end-line="147" selection-end-column="9" />
+            <state relative-caret-position="133">
+              <caret line="101" selection-start-line="101" selection-end-line="101" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sugo.py">
+        <entry file="file://$PROJECT_DIR$/data/SRR524815.tsv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="858">
-              <caret line="113" selection-start-line="113" selection-end-line="113" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="2385">
+              <caret line="159" column="28" lean-forward="true" selection-start-line="159" selection-start-column="28" selection-end-line="159" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/go-basic.obo">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="353">
+              <caret line="1477" column="16" lean-forward="true" selection-start-line="1470" selection-end-line="1479" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_samples/SRR524815.fastq.rem5.fastq.fa.pt.fasta.remshort.resultDBkegg.m8.parsed.mfunc.go.tsv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="8" selection-start-line="2" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/go-basic.obo">
+          <provider selected="true" editor-type-id="LargeFileEditor">
+            <state relative-caret-position="-305107">
+              <caret line="1404" column="24" selection-start-line="1404" selection-start-column="24" selection-end-line="1404" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -60,6 +95,15 @@
     <findStrings>
       <find>next</find>
       <find>go_list</find>
+      <find>go_filtered_list</find>
+      <find>split</find>
+      <find>3724</find>
+      <find>3743</find>
+      <find>0003984</find>
+      <find>0003724</find>
+      <find>feature_dataset</find>
+      <find>0000155</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -71,22 +115,22 @@
         <option value="$PROJECT_DIR$/process_diagram.puml" />
         <option value="$PROJECT_DIR$/graphviz_test.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/data/go-basic.obo" />
         <option value="$PROJECT_DIR$/sugo.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="805" />
-    <option name="y" value="33" />
-    <option name="width" value="1641" />
-    <option name="height" value="1324" />
+    <option name="x" value="929" />
+    <option name="y" value="137" />
+    <option name="width" value="1592" />
+    <option name="height" value="1209" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -108,6 +152,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -149,20 +194,25 @@
       <workItem from="1653185983745" duration="2002000" />
       <workItem from="1653188109368" duration="425000" />
       <workItem from="1653193300588" duration="5342000" />
+      <workItem from="1653240998686" duration="4111000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="15242000" />
+=======
+    <option name="totallyTimeSpent" value="19353000" />
+>>>>>>> 2022-oec-dev
   </component>
   <component name="ToolWindowManager">
-    <frame x="805" y="33" width="1641" height="1324" extended-state="0" />
+    <frame x="929" y="137" width="1592" height="1209" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22138837" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23096775" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3294539" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -173,7 +223,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="GraphQL" order="10" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.2353896" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.5335721" />
       <window_info anchor="bottom" id="Python Console" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -182,6 +232,31 @@
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="5" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.23096775" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3294539" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="GraphQL" order="10" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.5335721" />
+      <window_info anchor="bottom" id="Python Console" order="13" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="PlantUML" order="3" weight="0.2962963" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="SciView" order="5" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -191,6 +266,7 @@
     <entry file="file://$PROJECT_DIR$/process_diagram.puml" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="653">
           <caret line="147" column="9" selection-start-line="147" selection-start-column="9" selection-end-line="147" selection-end-column="9" />
         </state>
@@ -200,6 +276,10 @@
       <provider selected="true" editor-type-id="LargeFileEditor">
         <state relative-caret-position="189">
           <caret line="227" column="18" lean-forward="true" selection-start-line="227" selection-start-column="18" selection-end-line="227" selection-end-column="18" />
+=======
+        <state relative-caret-position="223">
+          <caret line="126" column="23" lean-forward="true" selection-start-line="126" selection-start-column="23" selection-end-line="126" selection-end-column="23" />
+>>>>>>> 2022-oec-dev
         </state>
       </provider>
     </entry>
@@ -213,27 +293,90 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data/test_samples/SRR5002413_2.tsv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/test_samples/SRR524815.tsv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/test_samples/SRR524823.tsv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/SRR5002413_2.tsv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/go.obo">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="-326077" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go-basic.txt">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="450">
+          <caret line="21755" column="14" selection-start-line="21755" selection-start-column="14" selection-end-line="21755" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test_samples/SRR524823.fastq.rem5.fastq.fa.pt.fasta.remshort.resultDBkegg.m8.parsed.mfunc.go.tsv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="165">
+          <caret line="11" column="10" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go-basic.obo">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="-305107">
+          <caret line="1404" column="24" selection-start-line="1404" selection-start-column="24" selection-end-line="1404" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/data/test_samples/SRR524823.tsv" />
+    <entry file="file://$PROJECT_DIR$/data/test_samples/SRR524815.tsv" />
+    <entry file="file://$PROJECT_DIR$/sugo.py">
+=======
+    <entry file="file://$PROJECT_DIR$/data/SRR524823.tsv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="770">
+          <caret line="392" lean-forward="true" selection-start-line="392" selection-end-line="392" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/go-basic.obo">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="1477" column="16" lean-forward="true" selection-start-line="1470" selection-end-line="1479" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test_samples/SRR524815.fastq.rem5.fastq.fa.pt.fasta.remshort.resultDBkegg.m8.parsed.mfunc.go.tsv">
-      <provider selected="true" editor-type-id="text-editor" />
+>>>>>>> 2022-oec-dev
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="8" selection-start-line="2" selection-end-line="3" />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/test_samples/SRR524823.tsv" />
-    <entry file="file://$PROJECT_DIR$/data/test_samples/SRR524815.tsv" />
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/data/SRR524815.tsv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2385">
+          <caret line="159" column="28" lean-forward="true" selection-start-line="159" selection-start-column="28" selection-end-line="159" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sugo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="113" selection-start-line="113" selection-end-line="113" />
+        <state relative-caret-position="133">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+>>>>>>> 2022-oec-dev
   </component>
 </project>
