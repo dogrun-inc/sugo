@@ -27,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sugo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="98" column="41" selection-start-line="98" selection-start-column="41" selection-end-line="98" selection-end-column="41" />
+            <state relative-caret-position="513">
+              <caret line="105" column="24" lean-forward="true" selection-start-line="105" selection-start-column="24" selection-end-line="105" selection-end-column="24" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
                 <element signature="e#858#1047#0" />
@@ -89,6 +89,17 @@
             <path>
               <item name="sugo" type="b2602c69:ProjectViewProjectNode" />
               <item name="sugo" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sugo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sugo" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="test_samples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sugo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sugo" type="462c0819:PsiDirectoryNode" />
               <item name="test_samples" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -140,11 +151,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14889000" />
+    <option name="totallyTimeSpent" value="15207000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="805" y="33" width="1641" height="1324" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22138837" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -175,9 +185,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test_samples/SRR524815.fastq.rem5.fastq.fa.pt.fasta.remshort.resultDBkegg.m8.parsed.mfunc.go.tsv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/graphviz_test.py" />
     <entry file="file://$PROJECT_DIR$/process_diagram.puml" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -211,10 +218,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test_samples/SRR524815.fastq.rem5.fastq.fa.pt.fasta.remshort.resultDBkegg.m8.parsed.mfunc.go.tsv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/test_samples/SRR524823.tsv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3395">
+          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/test_samples/SRR524815.tsv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17485" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sugo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="98" column="41" selection-start-line="98" selection-start-column="41" selection-end-line="98" selection-end-column="41" />
+        <state relative-caret-position="513">
+          <caret line="105" column="24" lean-forward="true" selection-start-line="105" selection-start-column="24" selection-end-line="105" selection-end-column="24" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
             <element signature="e#858#1047#0" />
