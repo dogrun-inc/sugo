@@ -21,12 +21,16 @@ args = parser.parse_args()
 - ファイルを書き出す 
 """
 
+go_obo = './go-basic.txt'
 go_full_list = []
 go_filtered_list = []
 
 
 def main():
-    print(args.i)
+    create_go_list()
+    # 0埋めし、スパースなデータセットをsqliteに保存
+
+    # filterしたgoについてデータセットをCSVで返す
 
 
 def read_tsv_list(n) -> list:
@@ -40,7 +44,7 @@ def read_tsv_list(n) -> list:
 # 行の先頭がidのものだけ抽出することで、GO_termのみのリストを作成する。
 def extract_unique_ids() -> list:
     go_list = []
-    with open('./go-basic.txt', "r") as f:
+    with open(go_obo, "r") as f:
         for line in f:
             if line.startswith('id'):
                 go_list.append(line.split(' ')[1].strip())
@@ -48,27 +52,11 @@ def extract_unique_ids() -> list:
     return go_list
 
 
-# ListをSQLiteへ入れる関数作る。
-# def list_into_sqlite():
-#     # テーブルがなければテーブルを作る
-#     CREATE_TABLE = 
-#     # 行がサンプル、列がGO_Term。
-
-
-# go-basic_セクション分け
-# def split_on_empty_lines():
-#     # greedily match 2 or more new-lines
-#     blank_line_regex = r"(?:\r?\n){2,}"
-#     with open('./go-basic.txt', "r") as f:
-#         str_f = f.read()
-#     print(re.split(blank_line_regex, str_f.strip()))
-
 def split_on_empty_lines() -> list:
-    # オントロジーファイルをブロックごと返すgenerator
-    # for 処理として利用する
-    # greedily match 2 or more new-lines
+    # oboファイルをオントロジーのブロックごと返すgenerator
+    # 呼び出し側でfor ブロックで利用する
     blank_line_regex = r"(?:\r?\n){2,}"
-    f = open("./go-basic.txt", "r")
+    f = open(go_obo, "r")
     str_f = f.read()
     iter_matches = re.split(blank_line_regex, str_f.strip())
     for match in iter_matches:
@@ -96,22 +84,6 @@ def create_go_list():
 
     go_filtered_list = list(set(go_filtered_list))
 
-# def go_basic_sections():
-#     with open('./go-basic.txt', "r") as f:
-#         str_f = f.read()
-#         # print(str_f,type(str_f))
-#         print(len(str_f))
-#         # iter_matches = re.finditer("[\w|\:|\!|\n]+\n\n", str_f)
-#         iter_matches = re.finditer('Term = (.+)$',str_f)
-#         for match in iter_matches:
-#             print(match.group())
-#             break
-
-
-# ユーザの求めるデータのみにFilterする関数
-# def filter
-
-
 
 # リストを作成してSQLiteへ格納する。
 def cut_tsv(go: list, l:list)-> list:
@@ -131,10 +103,4 @@ def cut_tsv(go: list, l:list)-> list:
 
 
 if __name__ == "__main__":
-    # go-basic.txtから、検索するためのdictを作り出す処理
-    #
-    # l = read_tsv_list(args.i)
-    # go_list = extract_unique_ids()
-    # cut_tsv(go_list, l)
-
-    create_go_list()
+    main()
