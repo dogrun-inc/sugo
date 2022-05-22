@@ -7,8 +7,8 @@ import re
 
 parser = argparse.ArgumentParser(description='add filter')
 parser.add_argument('-s')
-parser.add_argument('-g')
-parser.add_argument('-i')
+parser.add_argument('-g', help='keyword to retrieve')
+parser.add_argument('-i', help='directory name of tsv files')
 
 args = parser.parse_args()
 
@@ -28,16 +28,20 @@ go_filtered_list = []
 
 def main():
     create_go_list()
-    # 0埋めし、スパースなデータセットをsqliteに保存
+    # 0埋めしたスパースなデータセットをsqliteに保存
+    # Todo: コマンドを叩く度に読み込むなら, 全長のsqlite storeする必要無いのでは？？
+    cut_tsv(go_full_list, read_tsv_list(args.i))
+
 
     # filterしたgoについてデータセットをCSVで返す
 
 
-def read_tsv_list(n) -> list:
+def read_tsv_list(dir_path:str) -> list:
     """
     オプションとして設定したディレクトリから".tsv"ファイルのリストを取得し返す
+    Todo: .tsvだけで無く、tab,txtなども考慮する必要がある
     """
-    l = glob.glob('{}/*.tsv'.format(n))
+    l = glob.glob('{}/*.tsv'.format(dir_path))
     return l
 
 
@@ -87,16 +91,19 @@ def create_go_list():
 
 # リストを作成してSQLiteへ格納する。
 def cut_tsv(go: list, l:list)-> list:
+    # サンプルファイルごとにsqliteへの書き込みと
+    # tsvファイルへのフィルターしたデータの出力を行う
     for tsv_filename in l:
         tsv_output = []
         with open('./{}'.format(tsv_filename), encoding='utf-8', newline='') as f:
+            sample_name = tsv_filename.split(".")[0]
+            # 1レコード（GO: TPM）ごとの処理
             for cols in csv.reader(f):
-                # print(cols)
                 for x in cols:
-                    go_sample = x[0]
+                    go = x[0]
                     tpm = x[1]
                     for go_term in go:
-                        if go_term == go_sample:
+                        if go_term == go:
                             tsv_output.append({go_term:tpm})
                         else:
                             tsv_output.append({go_term:0})
