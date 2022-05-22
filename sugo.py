@@ -13,10 +13,8 @@ parser.add_argument('-i', help='directory name of tsv files')
 args = parser.parse_args()
 
 """
-- go-basicからgo id listを生成する
+- go-basicからgo id listを生成
 - 引数を取得し、データを出力する範囲を設定する
-- またオプションとして書き出し形式も設定する
-- TSVファイルを読み込み必要な部分を整形する。TSVを設置するディレクトリはオプションで設定する。
 - データの正規化：取得したGO-basicに合わせてTSVの足りないデータを0で埋める
 - ファイルを書き出す 
 """
@@ -30,10 +28,7 @@ def main():
     create_go_list()
     # 0埋めしたスパースなデータセットをsqliteに保存
     # Todo: コマンドを叩く度に読み込むなら, 全長のsqlite storeする必要無いのでは？？
-    cut_tsv(go_full_list, read_tsv_list(args.i))
-
-
-    # filterしたgoについてデータセットをCSVで返す
+    cut_tsv(read_tsv_list(args.i))
 
 
 def read_tsv_list(dir_path:str) -> list:
@@ -87,26 +82,64 @@ def create_go_list():
                 go_filtered_list.append(l[4:])
 
     go_filtered_list = list(set(go_filtered_list))
+    print(len(go_filtered_list))
 
 
 # リストを作成してSQLiteへ格納する。
-def cut_tsv(go: list, l:list)-> list:
-    # サンプルファイルごとにsqliteへの書き込みと
+def cut_tsv(l: list):
+    print(l)
+    # 以下ブロックでサンプルファイルごとにsqliteへの書き込みと
     # tsvファイルへのフィルターしたデータの出力を行う
     for tsv_filename in l:
-        tsv_output = []
+        # 全GOを含むデータセット
+        feature_dataset = {}
+        sample_name = tsv_filename.split(".")[0]
         with open('./{}'.format(tsv_filename), encoding='utf-8', newline='') as f:
-            sample_name = tsv_filename.split(".")[0]
-            # 1レコード（GO: TPM）ごとの処理
-            for cols in csv.reader(f):
-                for x in cols:
-                    go = x[0]
-                    tpm = x[1]
-                    for go_term in go:
-                        if go_term == go:
-                            tsv_output.append({go_term:tpm})
-                        else:
-                            tsv_output.append({go_term:0})
+            # 1レコードGO: TPMを辞書に追加追加
+            for row in csv.reader(f, delimiter='\t'):
+                print(row)
+                feature_dataset[row[0]] = row[1]
+
+        # print(feature_dataset) OK
+
+        """        
+        dataset_lst = []
+        for go in go_full_list:
+            # goがfeature_datasetに含まれる場合そのTPM値を渡してリスト（list of tuple）を生成する
+            if go in feature_dataset:
+                dataset_lst.append(go, feature_dataset[go])
+            # goがfeature_datasetに含まれない場合TPMカラムを0で埋める
+            else:
+                dataset_lst.append((go, 0))
+
+        create_table(sample_name)
+        store_data()
+        """
+
+        # filtered_listのみの(GO, TPM) listを生成する
+        filtered_list = []
+        for go in go_filtered_list:
+            if go in feature_dataset:
+                filtered_list.append([go, feature_dataset[go]])
+            else:
+                filtered_list.append([go, 0])
+
+        write_tsv(sample_name, filtered_list)
+
+
+def create_table(sample_name):
+    pass
+
+
+def store_data(sample_name, dataset_lst):
+    pass
+
+
+def write_tsv(sample_name, lst):
+    with open("./data/{}.tsv".format(sample_name), "w") as f:
+        print(sample_name)
+        writer = csv.writer(f, delimiter='\t')
+        writer.writerows(lst)
 
 
 if __name__ == "__main__":
