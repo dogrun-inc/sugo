@@ -13,12 +13,17 @@ parser.add_argument('-i')
 args = parser.parse_args()
 
 """
+- go-basicからgo id listを生成する
 - 引数を取得し、データを出力する範囲を設定する
 - またオプションとして書き出し形式も設定する
 - TSVファイルを読み込み必要な部分を整形する。TSVを設置するディレクトリはオプションで設定する。
 - データの正規化：取得したGO-basicに合わせてTSVの足りないデータを0で埋める
 - ファイルを書き出す 
 """
+
+go_full_list = []
+go_filtered_list = []
+
 
 def main():
     print(args.i)
@@ -58,23 +63,38 @@ def extract_unique_ids() -> list:
 #         str_f = f.read()
 #     print(re.split(blank_line_regex, str_f.strip()))
 
-def split_on_empty_lines():
+def split_on_empty_lines() -> list:
+    # オントロジーファイルをブロックごと返すgenerator
+    # for 処理として利用する
     # greedily match 2 or more new-lines
-    i=0
     blank_line_regex = r"(?:\r?\n){2,}"
-    with open('./go-basic.txt', "r") as f:
-        str_f = f.read()
+    f = open("./go-basic.txt", "r")
+    str_f = f.read()
     iter_matches = re.split(blank_line_regex, str_f.strip())
-    iter_matches.next()
     for match in iter_matches:
-        print(match)
-        print('\n')
-        i+=1
-        if i > 10:
-            break
+        yield match
 
-        
 
+def create_go_list():
+    """
+    全長およびオプション条件でfilterしたGO IDのリストを生成する
+    リストはグローバル
+    :return:
+    """
+    global go_full_list
+    global go_filtered_list
+
+    term = args.g
+
+    for t in split_on_empty_lines():
+        lines = t.split("\n")
+        for l in lines:
+            if l.startswith("id"):
+                go_full_list.append(l[4:])
+            if term in l:
+                go_filtered_list.append(l[4:])
+
+    go_filtered_list = list(set(go_filtered_list))
 
 # def go_basic_sections():
 #     with open('./go-basic.txt', "r") as f:
@@ -110,14 +130,11 @@ def cut_tsv(go: list, l:list)-> list:
                             tsv_output.append({go_term:0})
 
 
-
-
 if __name__ == "__main__":
     # go-basic.txtから、検索するためのdictを作り出す処理
-    # 
-
-
+    #
     # l = read_tsv_list(args.i)
     # go_list = extract_unique_ids()
     # cut_tsv(go_list, l)
-    split_on_empty_lines()
+
+    create_go_list()
