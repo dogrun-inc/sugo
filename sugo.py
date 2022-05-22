@@ -25,6 +25,7 @@ go_filtered_list = []
 
 
 def main():
+    # Todo: go-basic.oboをwgetするコマンドが必要（githubだと完全長は共有できないかも？）
     create_go_list()
     # 0埋めしたスパースなデータセットをsqliteに保存
     # Todo: コマンドを叩く度に読み込むなら, 全長のsqlite storeする必要無いのでは？？
