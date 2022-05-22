@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da619223-5d13-43c2-9b0b-0c58c95d6ac2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sugo_process_diagram.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/sugo_process_diagram.pdf" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +72,6 @@
         <option value="$PROJECT_DIR$/graphviz_test.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/sugo.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -153,7 +153,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15576000" />
+    <option name="totallyTimeSpent" value="15242000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="805" y="33" width="1641" height="1324" extended-state="0" />
@@ -189,6 +189,13 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/graphviz_test.py" />
     <entry file="file://$PROJECT_DIR$/process_diagram.puml" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="653">
+          <caret line="147" column="9" selection-start-line="147" selection-start-column="9" selection-end-line="147" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/go-basic.txt">
       <provider selected="true" editor-type-id="LargeFileEditor">
         <state relative-caret-position="189">
@@ -216,18 +223,8 @@
     <entry file="file://$PROJECT_DIR$/test_samples/SRR524815.fastq.rem5.fastq.fa.pt.fasta.remshort.resultDBkegg.m8.parsed.mfunc.go.tsv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/test_samples/SRR524823.tsv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3395">
-          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/test_samples/SRR524815.tsv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17485" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/data/test_samples/SRR524823.tsv" />
+    <entry file="file://$PROJECT_DIR$/data/test_samples/SRR524815.tsv" />
     <entry file="file://$PROJECT_DIR$/sugo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="858">
@@ -235,13 +232,6 @@
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="653">
-          <caret line="147" column="9" selection-start-line="147" selection-start-column="9" selection-end-line="147" selection-end-column="9" />
         </state>
       </provider>
     </entry>
