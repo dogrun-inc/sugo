@@ -6,9 +6,9 @@ import sqlite3
 import re
 
 parser = argparse.ArgumentParser(description='add filter')
-parser.add_argument('-s')
-parser.add_argument('-g', help='keyword to retrieve')
-parser.add_argument('-i', help='directory name of tsv files')
+parser.add_argument('-d', help='specify the directory where go.obo is located ')
+parser.add_argument('-g', help='keyword to grep')
+parser.add_argument('-i', help='specify the directory where source tsv file located')
 
 args = parser.parse_args()
 
