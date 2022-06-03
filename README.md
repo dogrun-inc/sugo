@@ -1,19 +1,28 @@
 # sugo
 
-## sugoの機能について
+## Main Features
 
-- sample x go ファイルをgrepし、tsvに書き出す機能etcをコマンドラインでツールとして提供します
+- 発現データセットをgo.oboに対して正規化してストアまたはgrepするPythonコマンドラインユーティリティ。
+- go x sampleの発現データをTSVファイルから読み込み、go-basic.obo全長に対してマッピングしたデータを生成しsqliteに保存する。
+- 検索キーワードを設定した場合、go-basic.oboにキーワードが含まれる行をgrepしtsvに書き出す。
+
+## Installation
 
 
-##　オプション
 
-- i :入力サンプルのディレクトリを指定。必須
-- c :フィルターする単語を指定。必須
 
-## 実行例
+## Usage
 
 ```
 python sugo.py -g phosphorylation -i test_samples
-
 ```
 
+
+###　Options
+
+- ```- i ```:入力サンプルのディレクトリを指定。必須
+- ```- g ```:grepする検索キーワードを指定する。このオプションをつけた場合、grepの結果がタブ区切りファイルに書き出される。
+
+## Dependency
+
+Python3.7以上
