@@ -6,10 +6,10 @@ import sqlite3
 import re
 
 parser = argparse.ArgumentParser(description='add filter')
-parser.add_argument('-d', help='specify the path of go obo file')
-parser.add_argument('-s', help='dabase path which store the result dataset')
+parser.add_argument('-d', help='specify the path of go obo file', required=True)
+parser.add_argument('-s', help='dabase path which store the result dataset', required=True)
 parser.add_argument('-g', help='keyword to grep')
-parser.add_argument('-i', help='specify the directory where source tsv file located')
+parser.add_argument('-i', help='specify the directory where source tsv file located', required=True)
 
 args = parser.parse_args()
 
@@ -106,7 +106,7 @@ def cut_tsv(l: list):
         for go in go_full_list:
             # goがfeature_datasetに含まれる場合そのTPM値を渡してリスト（list of tuple）を生成する
             if go in feature_dataset:
-                records.append(go, feature_dataset[go])
+                records.append([go, feature_dataset[go]])
             # goがfeature_datasetに含まれない場合TPMカラムを0で埋める
             else:
                 records.append((go, 0))
@@ -114,7 +114,7 @@ def cut_tsv(l: list):
         # テーブル(sample, go, TPM )作成
         create_table(args.s)
         # Todo: store_data()実装
-        store_data(args.s, records)
+        store_data(args.s, sample_name, records)
         # Todo インデックスの生成するかは検討（grepしたいでけの場合、インデックスは必要が無いが実行時間は掛かるため）
 
         # grepされた(GO, TPM) listを生成する
@@ -131,7 +131,7 @@ def cut_tsv(l: list):
 
 def create_table(path):
     # テーブルが存在しなかった場合作成
-    q = "CREATE TABLE GO_TPM (Sample TEXT, GO TEXT, TPM NUMBER) IF NOT EXIST".format()
+    q = "CREATE TABLE IF NOT EXISTS GO_TPM (Sample TEXT, GO TEXT, TPM NUMBER)".format()
     con = sqlite3.connect(path)
     cur = con.cursor()
     cur.execute(q)
@@ -139,8 +139,9 @@ def create_table(path):
     con.close()
 
 
-def store_data(path, dataset_lst):
-    q = "INSERT INTO GO_TPM (Sampe, GO, TPM) VALUES (%s, %s, %s)"
+def store_data(path, sample_name, dataset_lst):
+    dataset_lst = [(sample_name, x[0], x[1]) for x in dataset_lst]
+    q = "INSERT INTO GO_TPM (Sample, GO, TPM) VALUES(?, ?, ?)"
     con = sqlite3.connect(path)
     cur = con.cursor()
     cur.executemany(q, dataset_lst)

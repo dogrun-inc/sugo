@@ -10,13 +10,14 @@
 
 - sugoをgit clone
 - ローカルレポジトリに移動し（setup.pyと同じディレクトリに）
-- ```pip install -e . ```
+- レポジトリ内のパッケージをpip installする
+    - ```pip install -e . ```
 
 
 ## Usage
 
 ```
-sugo -g phosphorylation -i test_samples
+sugo -g phosphorylation -i test_samples -s ./data/sugo.db -d ./data/go-basic.obo
 ```
 
 
