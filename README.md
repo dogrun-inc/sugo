@@ -8,13 +8,15 @@
 
 ## Installation
 
-
+- sugoをgit clone
+- ローカルレポジトリに移動し（setup.pyと同じディレクトリに）
+- ```pip install -e . ```
 
 
 ## Usage
 
 ```
-python sugo.py -g phosphorylation -i test_samples
+sugo -g phosphorylation -i test_samples
 ```
 
 
