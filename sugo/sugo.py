@@ -6,26 +6,22 @@ import sqlite3
 import re
 
 parser = argparse.ArgumentParser(description='add filter')
-parser.add_argument('-d', help='specify the directory where go.obo is located ')
+parser.add_argument('-d', help='specify the path of go obo file')
+parser.add_argument('-s', help='dabase path which store the result dataset')
 parser.add_argument('-g', help='keyword to grep')
 parser.add_argument('-i', help='specify the directory where source tsv file located')
 
 args = parser.parse_args()
 
-"""
-- go-basicからgo id listを生成
-- 引数を取得し、データを出力する範囲を設定する
-- データの正規化：取得したGO-basicに合わせてTSVの足りないデータを0で埋める
-- ファイルを書き出す 
-"""
 
-go_obo = './data/go-basic.obo'
+# Todo: i) 設定しディレクトリにgo-basic.oboが無ければ, ii) 全ての操作前にgo-basic.oboをwget等する処理が必要
+# create_go_list()で処理
+go_obo = args.d
 go_full_list = []
 go_filtered_list = []
 
 
 def main():
-    # Todo: go-basic.oboをwgetするコマンドが必要（githubだと完全長は共有できないかも？）
     create_go_list()
     # 0埋めしたスパースなデータセットをsqliteに保存
     # Todo: コマンドを叩く度に読み込むなら, 全長のsqlite storeする必要無いのでは？？
@@ -95,31 +91,36 @@ def cut_tsv(l: list):
     for filename in l:
         # 全GOを含むデータセット
         feature_dataset = {}
+        # Todo: ファイル名からサンプル名を取得する方法が現在のファイル限定すぎるので要改善。
+        # 位置指定ではなく、パスを指定しPrefixを定義し、SR\w+的に取得する
         sample_name = re.split('\.|/', filename)[1]
         with open('./{}'.format(filename), encoding='utf-8', newline='') as f:
             # 1レコードGO: TPMを辞書に追加追加
             for row in csv.reader(f, delimiter='\t'):
                 feature_dataset[row[0]] = row[1]
 
-        """        
-        dataset_lst = []
+        # go-basic.oboの全長に対してマッピングしたデータセットをsqliteに保存
+        # go, tpmの2カラムのデータを保存
+        # Todo: 下のブロックのgrepしたリストとこのgo全長のリストを別々に生成するため冗長。要改善
+        records = []
         for go in go_full_list:
             # goがfeature_datasetに含まれる場合そのTPM値を渡してリスト（list of tuple）を生成する
             if go in feature_dataset:
-                dataset_lst.append(go, feature_dataset[go])
+                records.append(go, feature_dataset[go])
             # goがfeature_datasetに含まれない場合TPMカラムを0で埋める
             else:
-                dataset_lst.append((go, 0))
+                records.append((go, 0))
 
-        create_table(sample_name)
-        store_data()
-        """
+        # テーブル(sample, go, TPM )作成
+        create_table(args.s)
+        # Todo: store_data()実装
+        store_data(args.s, records)
+        # Todo インデックスの生成するかは検討（grepしたいでけの場合、インデックスは必要が無いが実行時間は掛かるため）
 
-        # filtered_listのみの(GO, TPM) listを生成する
+        # grepされた(GO, TPM) listを生成する
         filtered_list = []
         # フィルターされたGOリストでサンプルごとのTPMデータセットを舐め、値の入力もしくは０埋めする
         for go in go_filtered_list:
-
             if go in feature_dataset:
                 filtered_list.append([go, feature_dataset[go]])
             else:
@@ -128,12 +129,34 @@ def cut_tsv(l: list):
         write_tsv(sample_name, filtered_list)
 
 
-def create_table(sample_name):
-    pass
+def create_table(path):
+    # テーブルが存在しなかった場合作成
+    q = "CREATE TABLE GO_TPM (Sample TEXT, GO TEXT, TPM NUMBER) IF NOT EXIST".format()
+    con = sqlite3.connect(path)
+    cur = con.cursor()
+    cur.execute(q)
+    con.commit()
+    con.close()
 
 
-def store_data(sample_name, dataset_lst):
-    pass
+def store_data(path, dataset_lst):
+    q = "INSERT INTO GO_TPM (Sampe, GO, TPM) VALUES (%s, %s, %s)"
+    con = sqlite3.connect(path)
+    cur = con.cursor()
+    cur.executemany(q, dataset_lst)
+    con.commit()
+
+
+def create_index():
+    con = sqlite3.connect(args.s)
+    cur = con.cursor()
+    # Indexがすでに存在する場合Indexを消す
+    q = "CREATE INDEX go_index ON go_tpm(GO)"
+    cur.execute(q)
+    q = "CREATE INDEX sample_index ON go_tpm(Sample)"
+    cur.execute(q)
+    con.commit()
+    con.close()
 
 
 def write_tsv(sample_name, lst):
