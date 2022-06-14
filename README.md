@@ -23,10 +23,10 @@ sugo -g phosphorylation -i test_samples -s ./data/sugo.db -d ./data/go-basic.obo
 
 ###　Options
 
-- -i : 入力サンプルのディレクトリを指定。必須
+- -i : 入力サンプルのディレクトリ(実行場所からの相対パス)を指定。必須
 - -g : grepする検索キーワードを指定する。このオプションをつけた場合、grepの結果がタブ区切りファイルに書き出される。
 - -d : go-basic.oboのパスを指定する。必須
-- -s : sqlite dbのパスを指定する。必須
+- -s : sqlite dbのパス(データベース名まで)を指定する。必須
 
 ## Dependency
 

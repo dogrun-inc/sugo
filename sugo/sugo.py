@@ -12,7 +12,7 @@ from requests import exceptions
 parser = argparse.ArgumentParser(description="add filter")
 parser.add_argument("-d", help="specify the path of go obo file", required=True)
 parser.add_argument(
-    "-s", help="dabase path which store the result dataset", required=True
+    "-s", help="database path which store the result dataset", required=True
 )
 parser.add_argument("-g", help="keyword to grep")
 parser.add_argument(
@@ -20,9 +20,10 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
-
 url = "http://purl.obolibrary.org/obo/go/go-basic.obo"
-
+go_obo = "{}/go-basic.obo".format(args.d)
+go_full_list = []
+go_filtered_list = []
 
 # Todo: i) 設定しディレクトリにgo-basic.oboが無ければ, ii) 全ての操作前にgo-basic.oboをwget等する処理が必要
 # ファイルがあればgo_obo変数にファイルへのパスを保存。
@@ -63,25 +64,17 @@ def getdata(url: str) -> str:
         requestsで取得したデータ
     """
     data = requests.get(url).content
-    # errorの種類調べる。
-
     return data
 
 
-# -dで受け取ったディレクトリにgo-basic.oboファイルがあるかを確認。
-go_obo = "{}/go-basic.obo".format(args.d)
-if not check_dir(args.d):
-    # なければgetdata関数を使ってgo-basic.oboファイルをダウンロード。
-    getgobasic = getdata(url)
-    with open(go_obo, mode="wb") as f:
-        f.write(getgobasic)
-
-
-go_full_list = []
-go_filtered_list = []
-
-
 def main():
+    # -dで受け取ったディレクトリにgo-basic.oboファイルがあるかを確認。
+    if not check_dir(args.d):
+        # なければgetdata関数を使ってgo-basic.oboファイルをダウンロード。
+        getgobasic = getdata(url)
+        with open(go_obo, mode="wb") as f:
+            f.write(getgobasic)
+
     create_go_list()
     # 0埋めしたスパースなデータセットをsqliteに保存
     # Todo: コマンドを叩く度に読み込むなら, 全長のsqlite storeする必要無いのでは？？
@@ -191,7 +184,7 @@ def cut_tsv(l: list):
 
 def create_table(path):
     # テーブルが存在しなかった場合作成
-    q = "CREATE TABLE IF NOT EXISTS GO_TPM (Sample TEXT, GO TEXT, TPM NUMBER)".format()
+    q = "CREATE TABLE IF NOT EXISTS GO_TPM (Sample TEXT, GO TEXT, TPM NUMBER)"
     con = sqlite3.connect(path)
     cur = con.cursor()
     cur.execute(q)
