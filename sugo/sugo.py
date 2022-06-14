@@ -4,19 +4,79 @@ from dataclasses import dataclass
 import glob
 import sqlite3
 import re
+import os
+import requests
+from requests.exceptions import HTTPError
+from requests import exceptions
 
-parser = argparse.ArgumentParser(description='add filter')
-parser.add_argument('-d', help='specify the path of go obo file', required=True)
-parser.add_argument('-s', help='dabase path which store the result dataset', required=True)
-parser.add_argument('-g', help='keyword to grep')
-parser.add_argument('-i', help='specify the directory where source tsv file located', required=True)
+parser = argparse.ArgumentParser(description="add filter")
+parser.add_argument("-d", help="specify the path of go obo file", required=True)
+parser.add_argument(
+    "-s", help="dabase path which store the result dataset", required=True
+)
+parser.add_argument("-g", help="keyword to grep")
+parser.add_argument(
+    "-i", help="specify the directory where source tsv file located", required=True
+)
 
 args = parser.parse_args()
 
+url = "http://purl.obolibrary.org/obo/go/go-basic.obo"
+
 
 # Todo: i) 設定しディレクトリにgo-basic.oboが無ければ, ii) 全ての操作前にgo-basic.oboをwget等する処理が必要
-# create_go_list()で処理
-go_obo = args.d
+# ファイルがあればgo_obo変数にファイルへのパスを保存。
+#     ファイルがなければurlからファイルを取得してgo-oboにパスを保存。
+
+
+def check_dir(path_from_arg: str) -> bool:
+    """
+    -d で受け取ったディレクトリがあるか確認して、なければエラーメッセージを出す。
+    ディレクトリがあれば、`go-basic.obo`ファイルがあるかの有無を出力。
+
+    Parameters:
+    -----------------
+    path: str
+        -dで受け取ったディレクトリのパス。
+
+    Returns:
+    ------------
+    bool
+        go-basic.oboがあればTrue、なければFalse
+    """
+    if not os.path.isdir(path_from_arg):
+        return False
+
+    go_obo = "{}/go-basic.obo".format(path_from_arg)
+    return os.path.isfile(go_obo)
+
+
+def getdata(url: str) -> str:
+    """
+    Parameters:
+    ----
+    url: str
+        requestsでデータを取得するためのurl
+
+    Returns:
+    data: bytes
+        requestsで取得したデータ
+    """
+    data = requests.get(url).content
+    # errorの種類調べる。
+
+    return data
+
+
+# -dで受け取ったディレクトリにgo-basic.oboファイルがあるかを確認。
+go_obo = "{}/go-basic.obo".format(args.d)
+if not check_dir(args.d):
+    # なければgetdata関数を使ってgo-basic.oboファイルをダウンロード。
+    getgobasic = getdata(url)
+    with open(go_obo, mode="wb") as f:
+        f.write(getgobasic)
+
+
 go_full_list = []
 go_filtered_list = []
 
@@ -28,12 +88,12 @@ def main():
     cut_tsv(read_tsv_list(args.i))
 
 
-def read_tsv_list(dir_path:str) -> list:
+def read_tsv_list(dir_path: str) -> list:
     """
     オプションとして設定したディレクトリから".tsv"ファイルのリストを取得し返す
     Todo: .tsvだけで無く、tab,txtなども考慮する必要がある
     """
-    l = glob.glob('{}/*.tsv'.format(dir_path))
+    l = glob.glob("{}/*.tsv".format(dir_path))
     return l
 
 
@@ -42,9 +102,9 @@ def extract_unique_ids() -> list:
     go_list = []
     with open(go_obo, "r") as f:
         for line in f:
-            if line.startswith('id'):
-                go_list.append(line.split(' ')[1].strip())
-    
+            if line.startswith("id"):
+                go_list.append(line.split(" ")[1].strip())
+
     return go_list
 
 
@@ -93,10 +153,10 @@ def cut_tsv(l: list):
         feature_dataset = {}
         # Todo: ファイル名からサンプル名を取得する方法が現在のファイル限定すぎるので要改善。
         # 位置指定ではなく、パスを指定しPrefixを定義し、SR\w+的に取得する
-        sample_name = re.split('\.|/', filename)[1]
-        with open('./{}'.format(filename), encoding='utf-8', newline='') as f:
+        sample_name = re.split("\.|/", filename)[1]
+        with open("./{}".format(filename), encoding="utf-8", newline="") as f:
             # 1レコードGO: TPMを辞書に追加追加
-            for row in csv.reader(f, delimiter='\t'):
+            for row in csv.reader(f, delimiter="\t"):
                 feature_dataset[row[0]] = row[1]
 
         # go-basic.oboの全長に対してマッピングしたデータセットをsqliteに保存
@@ -162,7 +222,7 @@ def create_index():
 
 def write_tsv(sample_name, lst):
     with open("./data/{}.tsv".format(sample_name), "w") as f:
-        writer = csv.writer(f, delimiter='\t')
+        writer = csv.writer(f, delimiter="\t")
         writer.writerows(lst)
 
 
