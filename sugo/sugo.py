@@ -30,7 +30,7 @@ go_filtered_list = []
 #     ファイルがなければurlからファイルを取得してgo-oboにパスを保存。
 
 
-def check_dir(path_from_arg: str) -> bool:
+def check_dir(path: str) -> bool:
     """
     -d で受け取ったディレクトリがあるか確認して、なければエラーメッセージを出す。
     ディレクトリがあれば、`go-basic.obo`ファイルがあるかの有無を出力。
@@ -41,29 +41,25 @@ def check_dir(path_from_arg: str) -> bool:
         -dで受け取ったディレクトリのパス。
 
     Returns:
-    ------------
+    ----------------
     bool
         go-basic.oboがあればTrue、なければFalse
     """
-    if not os.path.isdir(path_from_arg):
+    if not os.path.isdir(path):
         return False
 
-    go_obo = "{}/go-basic.obo".format(path_from_arg)
+    go_obo = os.path.join(path, "/go-basic.obo")
     return os.path.isfile(go_obo)
 
 
-def getdata(url: str) -> str:
+def get_basic_obo() -> str:
     """
-    Parameters:
-    ----
-    url: str
-        requestsでデータを取得するためのurl
-
     Returns:
-    data: bytes
-        requestsで取得したデータ
+    --------------
+    data: str
+        requestsで取得したgo-basic.oboのデータ
     """
-    data = requests.get(url).content
+    data = requests.get("http://purl.obolibrary.org/obo/go/go-basic.obo").content
     return data
 
 
@@ -71,7 +67,7 @@ def main():
     # -dで受け取ったディレクトリにgo-basic.oboファイルがあるかを確認。
     if not check_dir(args.d):
         # なければgetdata関数を使ってgo-basic.oboファイルをダウンロード。
-        getgobasic = getdata(url)
+        getgobasic = get_basic_obo()
         with open(go_obo, mode="wb") as f:
             f.write(getgobasic)
 
@@ -86,7 +82,7 @@ def read_tsv_list(dir_path: str) -> list:
     オプションとして設定したディレクトリから".tsv"ファイルのリストを取得し返す
     Todo: .tsvだけで無く、tab,txtなども考慮する必要がある
     """
-    l = glob.glob("{}/*.tsv".format(dir_path))
+    l = glob.glob("f''{dir_path}/*.tsv")
     return l
 
 
@@ -147,7 +143,7 @@ def cut_tsv(l: list):
         # Todo: ファイル名からサンプル名を取得する方法が現在のファイル限定すぎるので要改善。
         # 位置指定ではなく、パスを指定しPrefixを定義し、SR\w+的に取得する
         sample_name = re.split("\.|/", filename)[1]
-        with open("./{}".format(filename), encoding="utf-8", newline="") as f:
+        with open("./f''{filename}", encoding="utf-8", newline="") as f:
             # 1レコードGO: TPMを辞書に追加追加
             for row in csv.reader(f, delimiter="\t"):
                 feature_dataset[row[0]] = row[1]
@@ -214,7 +210,7 @@ def create_index():
 
 
 def write_tsv(sample_name, lst):
-    with open("./data/{}.tsv".format(sample_name), "w") as f:
+    with open("./data/f''{sample_name}.tsv", "w") as f:
         writer = csv.writer(f, delimiter="\t")
         writer.writerows(lst)
 
