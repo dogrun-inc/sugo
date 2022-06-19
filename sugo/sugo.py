@@ -82,7 +82,7 @@ def read_tsv_list(dir_path: str) -> list:
     オプションとして設定したディレクトリから".tsv"ファイルのリストを取得し返す
     Todo: .tsvだけで無く、tab,txtなども考慮する必要がある
     """
-    l = glob.glob("f''{dir_path}/*.tsv")
+    l = glob.glob(f"{dir_path}/*.tsv")
     return l
 
 
@@ -143,7 +143,7 @@ def cut_tsv(l: list):
         # Todo: ファイル名からサンプル名を取得する方法が現在のファイル限定すぎるので要改善。
         # 位置指定ではなく、パスを指定しPrefixを定義し、SR\w+的に取得する
         sample_name = re.split("\.|/", filename)[1]
-        with open("./f''{filename}", encoding="utf-8", newline="") as f:
+        with open(f"./{filename}", encoding="utf-8", newline="") as f:
             # 1レコードGO: TPMを辞書に追加追加
             for row in csv.reader(f, delimiter="\t"):
                 feature_dataset[row[0]] = row[1]
@@ -210,7 +210,7 @@ def create_index():
 
 
 def write_tsv(sample_name, lst):
-    with open("./data/f''{sample_name}.tsv", "w") as f:
+    with open(f"./data/{sample_name}.tsv", "w") as f:
         writer = csv.writer(f, delimiter="\t")
         writer.writerows(lst)
 
