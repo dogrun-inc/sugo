@@ -151,3 +151,6 @@ data/
 process_diagram.puml
 
 test_samples/
+output/
+data/
+
