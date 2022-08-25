@@ -20,6 +20,11 @@
 sugo -g phosphorylation -i test_samples -s ./data/sugo.db -d ./data/go-basic.obo
 ```
 
+### sample_appの場合
+
+テストサーバを起動し、例えばフォームに"data", "test_samples", "oxidation"のように記述しsubmitボタンをクリックすると
+go-basic.oboのパス。サンプルデータのパス、キーワードがわたされ、メタスタンザが表示される。
+
 
 ###　Options
 
