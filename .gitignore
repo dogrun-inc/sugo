@@ -150,7 +150,11 @@ cython_debug/
 data/
 process_diagram.puml
 
+<<<<<<< HEAD
 test_samples/
 output/
 data/
 
+=======
+test_samples/*
+>>>>>>> 2022-dev
